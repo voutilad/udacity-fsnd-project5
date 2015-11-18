@@ -142,7 +142,8 @@ available at [http://localhost:9999/monitorix] on your local machine.
 
 
 
+# Some References
+Some other helpful links that helped with Project 5:
 
-
-# References
-[http://flask.pocoo.org/docs/0.10/deploying/mod_wsgi/]
+* [Flask's mod_wsgi instructions](http://flask.pocoo.org/docs/0.10/deploying/mod_wsgi/)
+* [How to Monitor with Monitorix](http://freedif.org/how-to-monitor-your-server-with-monitorix/)
