@@ -12,6 +12,10 @@ communicated in the notes as well:
 ssh -i ~/.ssh/udacity-grader grader@52.34.69.185 -p 2200
 ```
 
+The web interface is available at:
+(ec2-52-34-69-185.us-west-2.compute.amazonaws.com)[http://ec2-52-34-69-185.us-west-2.compute.amazonaws.com]
+
+
 # Server Setup
 
 The initial task was to start bootstrapping the server with the packages needed
@@ -46,6 +50,14 @@ Since my DB is bootstrapped by a python script, I used the `sudo su` trick to
 switch to the _catalog_ user since I purposely locked the account using
 `sudo passwd -l catalog` so nobody can log into it.
 
+# Deploying the App
+After git was installed, I whipped up a shell script (`deploy.sh` in the _grader_
+home directory) that uses `git archive` to properly "export" the local git
+master branch to a temporary location before moving files to _/var/www/catalog_.
+
+Right now it's pretty crude and will wipe out things like the _uploads_ folder,
+but could be improved to properly preserve that.
+
 ## Apache2 Config
 
 Getting mod_wsgi to launch the Catalog app was surprisingly easy in some ways
@@ -55,7 +67,8 @@ logging middleware per [Debugging Techniques]
 (https://code.google.com/p/modwsgi/wiki/DebuggingTechniques)).
 
 Ultimately, Apache2 is pointing to /var/www/catalog for the app and running as
-the _catalog_ user (which owns that directory).
+the _catalog_ user (which owns that directory). See the config in
+`/etc/apache2/sites-enabled/000-default.conf`.
 
 
 # Resolving Web App issues for Production
